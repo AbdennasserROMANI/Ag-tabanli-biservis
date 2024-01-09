@@ -1,0 +1,81 @@
+﻿@page
+@model WebApplication1.Pages.NotificationModel
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Notif> notifs = (List<Notif>)TempData["notif"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%; /* Ensure body takes full width */
+            box-sizing: border-box; /* Include padding and borders in the element's total width */
+        }
+
+        .notification-container {
+            padding: 20px;
+            width: 180%; /* Set width to 100% */
+            margin: 0 auto; /* Center the container */
+            box-sizing: border-box;
+        }
+
+        .notification {
+            padding: 20px;
+            border-left: 20px solid #007bff; /* Blue border for unread notifications */
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .notification:hover {
+                background-color: #e9ecef;
+                border-left-color: #0056b3; /* Darker blue on hover */
+            }
+
+            .notification h6 {
+                margin: 0;
+                font-size: 16px;
+                color: #333;
+            }
+
+        .notification-read {
+            border-left-color: #6c757d; /* Grey border for read notifications */
+        }
+
+            .notification-read:hover {
+                border-left-color: #5a6268; /* Darker grey on hover */
+            }
+
+        .important {
+            color: #dc3545; /* Red color for important notifications */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-container">
+        @foreach (Notif notif in notifs)
+        {
+            <div class="notification @(notif.cu_stat.Equals("0") ? "" : "notification-read")">
+                <h6>
+                    <span class="sd-id">@notif.sd_id</span>:
+                    <span class="wo-name">@notif.wo_name</span> size bir teklif verdi, teklif fiyati:
+                    <span class="te-fiyat">@notif.te_fiyat</span>
+                    @if (notif.cu_stat.Equals("0"))
+                    {
+                        <span class="important">**********</span>
+                    }
+                </h6>
+            </div>
+        }
+    </div>
+</body>
+</html>

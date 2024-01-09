@@ -1,0 +1,147 @@
+﻿@page
+@model WebApplication1.Pages.editService_M2Model
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Orders> orders = (List<Orders>)TempData["order"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... other head elements ... -->
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.4.min.js">
+    <style>
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+        }
+
+        .container-fluid {
+            width: 1260px; /* Increased width */
+            margin: auto;
+            height: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            margin: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-line {
+            margin-bottom: 20px;
+        }
+
+        .font-12 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        button[type=submit] {
+            margin-top: 20px;
+            background-color: #00CDC4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            display: block; /* Make the button full-width */
+            width: 100%;
+        }
+
+        button[type=submit]:hover {
+            background-color: #333;
+        }
+
+        .image {
+            border: none;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <section class="content">
+        <div class="container-fluid">
+                
+            <form id="form_validation" method="post" enctype="multipart/form-data">
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Tesisatçı</h2>
+                    </div>
+                    <div class="body">
+
+
+                        <div class="card corner-radius">
+                            
+                            <div class="body">
+
+                                <div class="row clearfix">
+
+                                    <div class="form-group col-sm-12">
+                                        <div class="form-line">
+                                            <div class="font-12">Yapmak Istediğiniz İşlemler.</div>
+                                            <input type="text" class="form-control" name="not" id="not" placeholder="Ne islem yapmak istiyorsun ??" value="@orders[0].sd_not" required>
+                                        </div>
+                                    </div>
+
+                                    Tarih : <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+
+                                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                                        <div class="form-group">
+                                            <div class="font-12 ex1">Image</div>
+                                            <input type="file" name="image" id="image" class="image" data-max-file-size="3M" data-allowed-file-extensions="jpg jpeg png gif" />
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="s_id" value="@Model.sd_id" />
+
+                                    <div class="col-sm-12">
+                                        <button type="submit" value="Submit" asp-page-handler="Submit">Güncelle</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>         
+    </section>
+</body>
+</html>
+
+

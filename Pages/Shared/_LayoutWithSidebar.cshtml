@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - WebApplication1</title>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZn8Y4eEGQ5PzNFoMdZz2VKiwqMuFgW9K1i4mRJ0l+Vn0zTt84MToWtliHjvJk9" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+        <style>
+            .body {
+                margin: 0;
+                font-family: 'Arial', sans-serif;
+                background-color: #f1f1f1;
+            }
+
+            .footer {
+                margin-top: 10px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                white-space: nowrap;
+                line-height: 60px;
+                text-align: right;
+            }
+
+
+            /*************************/
+            /*************************/
+            /*************************/
+            /*************************/
+            /*************************/
+
+            .msidebar {
+                position: sticky; /* Sticky position */
+                top: 0; /* Distance from the top */
+                height: calc(110vh - 60px); /* Full height minus any top bars or headers */
+                padding-top: 0px;
+                width: 250px;
+                background-color: #333; /* Dark background for sidebar */
+                color: white;
+                text-align: center;
+    o           verflow-y: auto; 
+            }
+
+                .msidebar a {
+                    color: white;
+                    text-decoration: none;
+                    padding: 15px; /* Increased padding for larger touch targets */
+                    display: flex;
+                    align-items: center; /* Vertically center the icon and text */
+                    gap: 15px; /* Add space between icon and text */
+                    transition: background-color 0.4s;
+                }
+
+                    .msidebar a:hover {
+                        background-color: #444; /* Slightly lighter background on hover */
+                    }
+
+                    .msidebar a i {
+                        min-width: 20px; /* Ensure icons align even if they are different widths */
+                        text-align: center; /* Center the icons if they don't take up the full width */
+                    }
+
+            .info-container {
+                padding: 30px;
+                border-bottom: 1px solid #484848; /* Add a subtle border to the bottom of the info container */
+            }
+
+
+            .mheader {
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 60px;
+            }
+
+            .mcontainer {
+                display: flex;
+            }
+
+        
+
+            .mcontent {
+                flex: 1;
+                padding: 30px;
+            }
+
+        
+
+        </style>
+        @RenderSection("Styles", required: false)
+
+    </head>
+    <body class="mbody">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow position-sticky" style="background-color: #0A8ED9;">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">BiServis</a>
+                    <div style="margin-left: auto;margin-right: 200;">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">Hakkimizda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/ContactUs">Iletisim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Gizlilik Politikasi</a>
+                            </li>
+                        </ul>
+                    </div>
+                
+                </div>
+            </nav>
+        </header>
+
+
+
+        <div class="mcontainer">
+            <div class="msidebar" style="width:250px">
+                <div class="info-container">
+                
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>@Context.Session.GetString("name")</b>
+                    </div>
+                    <div class="email"><b>@Context.Session.GetString("email")</b></div>
+                </div> 
+                <a href="Musteri"><i class="fas fa-wrench"></i> Servisler</a>
+                <a href="editProfile"><i class="fas fa-user"></i> Profil</a>
+                <a href="activeOrder"><i class="fas fa-shopping-cart"></i> Aktif Siparişler</a>
+                <a href="oldOrders"><i class="fas fa-box-open"></i> Geçmiş Siparişler</a>
+                <a href="Notification"><i class="fas fa-bell"></i> Bildirimler</a>
+                <a href="logOut"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+            </div>
+
+            <div class="content">
+                @RenderBody()
+            </div>
+        </div>
+
+
+
+        <footer class="border footer ">
+            <div class="container">
+                Telif Hakkı ayrılmış; 2023 - ABROMANI - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+
+
+
+
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>

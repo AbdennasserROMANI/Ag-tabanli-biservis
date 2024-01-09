@@ -1,0 +1,192 @@
+﻿@page
+@model WebApplication1.Pages.editService_M5Model
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Orders> orders = (List<Orders>)TempData["order"];
+}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewData["Title"]</title>
+
+
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                font-family: 'Arial', sans-serif;
+                background: #f4f4f4;
+            }
+
+            .container-fluid {
+                width: 1260px; /* Increased width */
+                margin: auto;
+                height: auto;
+                padding: 20px;
+            }
+
+            .card {
+                background: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                padding: 30px;
+                margin-bottom: 30px;
+            }
+
+            .header h2 {
+                margin: 0;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #007bff;
+                color: #007bff;
+                font-size: 24px;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            .form-line {
+                margin-bottom: 20px;
+            }
+
+            .font-12 {
+                font-size: 18px;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            button[type=submit] {
+                margin-top: 20px;
+                background-color: #00CDC4;
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 18px;
+                transition: background-color 0.3s;
+                display: block; /* Make the button full-width */
+                width: 100%;
+            }
+
+                button[type=submit]:hover {
+                    background-color: #333;
+                }
+
+            .image {
+                border: none;
+            }
+
+
+            .inputt {
+                background-color: #333;
+                color: white;
+            }
+
+
+            .buttonn {
+                background: #333;
+                color: white;
+                width: 20%;
+                margin-top: 2%;
+                margin-bottom: 1%;
+                display: block; /* Makes the element a block-level element */
+                margin-left: auto; /* Centers the element horizontally */
+                margin-right: auto;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <section class="content">
+            <div class="container-fluid">
+
+
+                <h1>Yaslı Information</h1>
+
+                <form method="post">
+                    <label for="numberOfChildren">Yaşlıların Sayısı : </label>
+                    <input type="number" asp-for="NumberOfChildren" min="1" required />
+                    <button type="button" onclick="addChildren()"> + Ekle </button>
+
+                    <div id="childrenForm"></div>
+
+                    <div class="form-group col-sm-12">
+                        <div class="form-line">
+                            <div class="font-12">Not</div>
+                            <input type="text" class="form-control" name="not" id="not" placeholder="Not" value="@orders[0].sd_not" required>
+                        </div>
+                    </div>
+
+
+                    <table>
+                        <thead type="hidden">
+                            <tr>
+                                <th width="50%"></th>
+                                <th width="50%"></th>
+                            </tr>
+                        </thead>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <div class="form-line">
+                                    <div class="font-12">Gün Sayısı</div>
+                                    <input type="text" name="gunS" id="gunS" placeholder="Gün Sayısı" value="@orders[0].gun_sayisi" />
+                                </div>
+                            </td>
+                            <td style="vertical-align: middle;">
+                                <div class="form-line">
+                                    <div class="font-12">Saat Sayısı</div>
+                                    <input type="text" name="saatS" id="saatS" placeholder="Toplam Saat Sayısı" value="@orders[0].saat_sayisi" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    DateTime: <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+
+                    <input type="hidden" name="s_id" value="@Model.sd_id" />
+
+                    <button type="submit">Güncelle</button>
+
+                </form>
+
+
+            </div>
+        </section>
+
+
+        <script>
+
+            function addChildren() {
+                var numberOfChildren = document.getElementById("NumberOfChildren").value;
+                var form = "";
+
+                for (var i = 1; i <= numberOfChildren; i++) {
+                    form += `<div>
+                                                                <label for="Children[${i - 1}].Age">Child ${i} Age:</label>
+                                                                <input type="number" name="Children[${i - 1}].Age" required />
+                                                                <label for="Children[${i - 1}].Sex">Sex:</label>
+                                                                <select name="Children[${i - 1}].Sex" required>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </select>
+                                                            </div>`;
+                }
+
+                document.getElementById("childrenForm").innerHTML = form;
+            }
+        </script>
+
+
+    </body>
+</html>

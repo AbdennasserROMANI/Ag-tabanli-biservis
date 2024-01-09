@@ -1,0 +1,150 @@
+﻿@page
+@model WebApplication1.Pages.ServiceDetails_M2Model
+@{
+    Layout = "_WorkerLayout";
+	List<Orders> orders = (List<Orders>)TempData["order"];
+}
+
+<html>
+
+	<head>
+		<style>
+
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+        }
+
+
+        .container-fluid {
+            width: 1260px; /* Increased width */
+            margin: auto;
+            height: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            margin: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-line {
+            margin-bottom: 20px;
+        }
+
+        .font-12 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        button[type=submit] {
+            margin-top: 20px;
+            background-color: #00CDC4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            display: block; /* Make the button full-width */
+            width: 100%;
+        }
+
+            button[type=submit]:hover {
+                background-color: #333;
+            }
+
+        .image {
+            border: none;
+        }
+
+
+
+		</style>
+	</head>
+
+
+
+	<body>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<section class="content">
+
+			<div class="container-fluid">
+
+				<div class="row clearfix">
+					
+                    <div class="body">
+
+						<form id="form_validation" method="post" enctype="multipart/form-data">
+							<div class="card">
+								<div class="header">
+									<h2>Tesisatçı</h2>
+								</div>
+								<div class="body">
+
+									<div class="row clearfix">
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Ne islem yapmak istiyorsun ??</div>
+												<h6 class="font-12">@orders[0].sd_not</h6>
+											</div>
+										</div>
+
+										DateTime: <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" readonly/>
+
+										<div class="col-sm-6" style="margin-bottom: 0px;">
+											<div class="form-group">
+												<div class="font-12 ex1">Image</div>
+												<img src="https://romani-au.digital/APIs/BiServis/uploads/@orders[0].image" alt="Image" class="image-preview" />
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+                    </div>
+					
+				</div>
+
+			</div>
+
+		</section>
+
+
+	</body>
+
+</html>

@@ -1,0 +1,112 @@
+﻿@page
+@model WebApplication1.Pages.MusteriTeklifleriModel
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Talepler> talepler = (List<Talepler>)TempData["order"];
+}
+
+<style>
+    /* CSS for styling the info-box and buttons */
+    .info-box {
+        background: #333;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.9);
+        margin-top: 10px;
+        padding: 70px;
+        width: 1150px;
+        height: auto;
+        margin-bottom: 3%;
+        position: relative;
+        right: -4%;
+    }
+
+        .info-box h4 {
+            margin: 5px 0;
+            color: white;
+        }
+
+    .buttons {
+        position: absolute; /* Position the buttons container absolutely */
+        right: 10px; /* Place it towards the right inside the info-box */
+        top: 10px;
+        
+    }
+
+        .buttons form {
+            display: block; /* Stack buttons vertically */
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+
+
+        .buttons button {
+            background: linear-gradient(180deg, rgba(255, 223, 120, 0.8) 0%, rgba(255, 105, 180, 0.8) 100%);
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block; /* Make buttons block level to fill the width of the form */
+            width: 100%; /* Optional: if you want button width to be the same */
+            box-sizing: border-box;
+            margin-right: 60px;
+            margin-bottom: 60px;
+            margin-top: 50px;
+            margin-left: -20px;
+        }
+
+            .buttons button:hover {
+                background: #339;
+            }
+
+
+        .text-infoo {
+            color: white;
+            margin-top: 150px; /* Adds a top margin - adjust as needed */
+            margin-right: 50px; /* Adds a left margin - adjust as needed */
+            
+        }
+
+</style>
+
+
+
+@if(talepler != null){
+@foreach(Talepler talep in talepler){
+    <div class="info-box">
+        <h4>Telap No : @talep.te_id</h4>
+        <h4>Teklif Fiyatı : @talep.te_fiyat</h4>
+        <h4>Telap Tarihi : @talep.te_date</h4>
+        <h4>Çalışanın Adı : @talep.wo_name</h4>
+        <h4>Çalışanın Tel. : @talep.wo_tel</h4>
+        <h4>Çalışanın Yıl Tecrübesi : @talep.wo_tecrube</h4>
+        <h4>Çalışan No : @talep.wo_id</h4>
+
+
+        <div class="buttons">
+            @if (talep.te_stat.Equals("0"))
+            {
+                <form method="post">
+                    <input type="hidden" name="teklif_id" value="@talep.te_id"/>
+                    <input type="hidden" name="sd_id" value="@talep.sd_id" />
+                    <button type="submit" name="handler" value="kabul">Kabulet</button>
+                    <button type="submit" name="handler" value="red">Reddet</button>
+                </form>
+            }
+            else if (talep.te_stat.Equals("-1"))
+            {
+                <h3 class="text-infoo">Talebi Sizin Tarafindan Reddedilmistir</h3>
+            }
+            else if (talep.te_stat.Equals("1"))
+            {
+                <h3 class="text-infoo">Talebi Sizin Tarafindan Kabuledilmistir</h3>
+            }
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+}
+}

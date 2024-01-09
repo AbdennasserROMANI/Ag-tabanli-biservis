@@ -1,0 +1,291 @@
+﻿@page
+@model WebApplication1.Pages.ServicePages.Service_M1Model
+@{
+	Layout = "_LayoutWithSidebar";
+	string s_id = (String)Request.Query["s_id"];
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- ... other head elements ... -->
+		<link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.4.min.js">
+		<style>
+
+			body, html {
+				margin: 0;
+				padding: 0;
+				font-family: 'Arial', sans-serif;
+				background: #f4f4f4;
+			}
+
+			.container-fluid {
+				width: 1260px; /* Increased width */
+				margin: auto;
+				height: auto;
+				padding: 20px;
+			}
+
+			.card {
+				background: #ffffff;
+				border-radius: 15px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+				padding: 30px;
+				margin-bottom: 30px;
+			}
+
+			.header h2 {
+				margin: 0;
+				padding-bottom: 15px;
+				border-bottom: 2px solid #007bff;
+				color: #007bff;
+				font-size: 24px;
+			}
+
+			.form-control {
+				width: 100%;
+				padding: 12px;
+				margin: 10px 0;
+				border-radius: 8px;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+
+			.form-line {
+				margin-bottom: 20px;
+			}
+
+			.font-12 {
+				font-size: 18px;
+				color: #333;
+				margin-bottom: 10px;
+			}
+
+			button[type=submit] {
+				margin-top: 20px;
+				background-color: #00CDC4;
+				color: white;
+				border: none;
+				padding: 15px 30px;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 18px;
+				transition: background-color 0.3s;
+				display: block; /* Make the button full-width */
+				width: 100%;
+			}
+
+				button[type=submit]:hover {
+					background-color: #333;
+				}
+
+			.image {
+				border: none;
+			}
+
+		</style>
+	</head>
+
+
+
+	<body>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<section class="content">
+			<div class="container-fluid">
+				<form id="form_validation" method="post" enctype="multipart/form-data">
+					<div class="card">
+
+						<div class="header">
+							<h2>Temizleyici</h2>
+						</div>
+						<div class="body">
+
+
+							<div class="form-group col-sm-12">
+								<div class="form-line">
+									<table>
+										<thead type="hidden">
+											<tr>
+												<th width="50%"></th>
+												<th width="50%"></th>
+											</tr>
+										</thead>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Salon Sayisi</div>
+													<input type="text" name="salonS" id="salonS" placeholder="Salon Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Salon Metresi</div>
+													<input type="text" name="salonM" id="salonM" placeholder="Salon Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Mutfak Sayisi</div>
+													<input type="text" name="mutfakS" id="mutfakS" placeholder="Mutfak Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Mutfak Metresi</div>
+													<input type="text" name="mutfakM" id="mutfakM" placeholder="Mutfak Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Buro Sayisi</div>
+													<input type="text" name="buroS" id="buroS" placeholder="Buro Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Buro Metresi</div>
+													<input type="text" name="buroM" id="buroM" placeholder="Buro Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Depo Sayisi</div>
+													<input type="text" name="depoS" id="depoS" placeholder="Depo Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Depo Metresi</div>
+													<input type="text" name="depoM" id="depoM" placeholder="Depo Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Sayisi</div>
+													<input type="text" name="banyoS" id="banyoS" placeholder="Banyo Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Metresi</div>
+													<input type="text" name="banyoM" id="banyoM" placeholder="Banyo Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Tuvalet Sayisi</div>
+													<input type="text" name="tuvaletS" id="tuvaletS" placeholder="Tuvalet Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Metresi</div>
+													<input type="text" name="tuvaletM" id="tuvaletM" placeholder="Tuvalet Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Oda Sayisi</div>
+													<input type="text" name="odaS" id="odaS" placeholder="Oda Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Oda Metresi</div>
+													<input type="text" name="odaM" id="odaM" placeholder="Oda Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Bahce Sayisi</div>
+													<input type="text" name="bahceS" id="bahceS" placeholder="Bahce Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Bahce Metresi</div>
+													<input type="text" name="bahceM" id="bahceM" placeholder="Bahce Metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Balkon Sayisi</div>
+													<input type="text" name="balkonS" id="balkonS" placeholder="Balkon Sayisi" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Balkon Metresi</div>
+													<input type="text" name="balkonM" id="balkonM" placeholder="Balkon Metresi" />
+												</div>
+											</td>
+										</tr>
+
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group col-sm-12">
+							<div class="form-line">
+								<div class="font-12">Not</div>
+								<input type="text" class="form-control" name="not" id="not" placeholder="Not" required>
+							</div>
+						</div>
+
+						DateTime: <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+
+						<input type="hidden" class="form-control" name="agacS" id="agacS" placeholder="agacS" required>
+
+						<div class="col-sm-6" style="margin-bottom: 0px;">
+							<div class="form-group">
+								<div class="font-12 ex1">Image</div>
+								<input type="file" name="image" id="image" class="image" data-max-file-size="3M" data-allowed-file-extensions="jpg jpeg png gif" />
+							</div>
+						</div>
+
+						<input type="hidden" name="s_id" value="@s_id" />
+
+						<div class="col-sm-12">
+							<button type="submit" value="Submit" asp-page-handler="Submit">Gönder</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</body>
+</html>
+
+
+
+

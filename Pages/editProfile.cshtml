@@ -1,0 +1,299 @@
+﻿@page
+@model WebApplication1.Pages.editProfileModel
+@{
+
+	string stat = HttpContext.Session.GetString("stat");
+
+	if (stat.Equals("1"))
+	{
+		Layout = "_LayoutWithSidebar";
+	}
+	else if (stat.Equals("2"))
+	{
+		Layout = "_WorkerLayout";
+	}
+
+	List<Customer> mydata = (List<Customer>)TempData["mydata"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Profil Bilgileri Güncelleme</title>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<style>
+
+
+
+
+			/* Insert the CSS code here */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Arial', sans-serif;
+			}
+
+			.card {
+				border-radius: 0px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				overflow: hidden;
+			}
+
+			.header h2 {
+				font-weight: bold;
+				font-size: 24px;
+				color: white;
+				padding: 15px;
+				background-color: #333;
+				border-bottom: 1px solid #eaeaea;
+			}
+			/* ... Rest of the CSS ... */
+
+
+
+			/* Style the form body */
+			.body {
+				color: #333;
+				padding: 15px; /* Add some padding inside the form */
+				background-color: white; /* White background for the form body */
+				font-weight: bold;
+			}
+
+			/* Style each input and select element with modern looks */
+			.form-control {
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+				border: 5px solid #333; /* Subtle border */
+				border-radius: 5px; /* Slightly rounded corners for inputs */
+				padding: 10px; /* Add some padding inside inputs */
+				font-size: 16px; /* Slightly larger font size for readability */
+				font-weight: bold;
+				color: #333;
+				margin-bottom: 20px;
+			}
+
+			/* Style the submit button with a modern appearance */
+			button[type="submit"] {
+				background-color: #333;
+				color: white; /* White text on the button */
+				padding: 15px 15px; /* Larger padding for a bigger button */
+				border: none; /* Remove the default border */
+				border-radius: 5px; /* Slightly rounded corners for the button */
+				cursor: pointer; /* A pointer cursor on hover */
+				font-size: 18px; /* Slightly larger font size for the button */
+				transition: background-color 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+			}
+
+				/* Hover effect for the submit button */
+				button[type="submit"]:hover {
+					background-color: #48440C; /* A slightly darker blue on hover */
+					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* A subtle shadow on hover */
+					color: white;
+				}
+
+			/* Responsive adjustments for smaller screens */
+
+
+			button[type="submit"] {
+				width: 50%; /* Full width button on smaller screens */
+				margin-top: 20px;
+				margin-left: 20%;
+				
+			}
+
+		</style>
+	</head>
+
+
+	<body>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<div id="notification-area" style="position: fixed; top: 30px; right: 20px; z-index: 1000;"></div>
+
+		<section class="content">
+
+			<div class="container-fluid">
+
+				<div class="row clearfix">
+					<div class="">
+
+						<form id="form_validation" method="post" enctype="multipart/form-data">
+							<div class="card corner-radius">
+								<div class="header">
+									<h2>Profil Düzeletme</h2>
+								</div>
+								<div class="body">
+
+									<div class="row clearfix">
+
+										@if (stat.Equals("2"))
+										{
+											<div>
+												<label for="image">Choose Image:</label>
+												<input type="file" src="@mydata[0].image" name="image" id="image" accept="image/*">
+											</div>
+										}
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Adi Soyadi</div>
+												<input type="text" class="form-control" name="name" id="name" value="@mydata[0].name" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">TC</div>
+												<input type="text" class="form-control" name="tcnu" id="tcnu" value="@mydata[0].tc" readonly>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Telefon Numarasi</div>
+												<input type="text" class="form-control" name="telephon" id="telephon" value="@mydata[0].tel" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">E-Posta</div>
+												<input type="text" class="form-control" name="eposta" id="eposta" value="@mydata[0].posta" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Password</div>
+												<input type="password" class="form-control" name="password" id="password" value="@mydata[0].password" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Tekrar Password</div>
+												<input type="password" class="form-control" name="tkpassword" id="tkpassword" value="@mydata[0].password" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="font-12">Sehir</div>
+											<select class="form-control show-tick" name="sehir" id="sehir">
+												<option value="Istanbul" selected="@((mydata[0].city == "Istanbul").ToString().ToLower())">Istanbul</option>
+												<option value="Ankara" selected="@((mydata[0].city == "Ankara").ToString().ToLower())">Ankara</option>
+												<option value="Izmir" selected="@((mydata[0].city == "Izmir").ToString().ToLower())">Izmir</option>
+												<option value="Bursa" selected="@((mydata[0].city == "Bursa").ToString().ToLower())">Bursa</option>
+												<option value="Adana" selected="@((mydata[0].city == "Adana").ToString().ToLower())">Adana</option>
+												<option value="Gaziantep" selected="@((mydata[0].city == "Gaziantep").ToString().ToLower())">Gaziantep</option>
+												<option value="Konya" selected="@((mydata[0].city == "Konya").ToString().ToLower())">Konya</option>
+												<option value="Antalya" selected="@((mydata[0].city == "Antalya").ToString().ToLower())">Antalya</option>
+												<option value="Diyarbakir" selected="@((mydata[0].city == "Diyarbakir").ToString().ToLower())">Diyarbakir</option>
+												<option value="Mersin" selected="@((mydata[0].city == "Mersin").ToString().ToLower())">Mersin</option>
+											</select>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Adres</div>
+												<input type="text" class="form-control" name="adres" id="adres" value="@mydata[0].addres" required>
+											</div>
+										</div>
+
+										@if (stat.Equals("2"))
+										{
+											<div class="form-group">
+												<div class="font-12">Bolum</div>
+												<select class="form-control show-tick" name="bolum" id="bolum" readonly>
+													<option value="1" selected="@((mydata[0].bolum == "1").ToString().ToLower())" disabled>Temizleyici</option>
+													<option value="2" selected="@((mydata[0].bolum == "2").ToString().ToLower())" disabled>Tesisatçı</option>
+													<option value="3" selected="@((mydata[0].bolum == "3").ToString().ToLower())" disabled>Electrikçi</option>
+													<option value="4" selected="@((mydata[0].bolum == "4").ToString().ToLower())" disabled>Boyacı</option>
+													<option value="5" selected="@((mydata[0].bolum == "5").ToString().ToLower())" disabled>Marangoz</option>
+													<option value="6" selected="@((mydata[0].bolum == "6").ToString().ToLower())" disabled>Bahçıvan</option>
+													<option value="7" selected="@((mydata[0].bolum == "7").ToString().ToLower())" disabled>Çocuk bakıcısı</option>
+													<option value="8" selected="@((mydata[0].bolum == "8").ToString().ToLower())" disabled>Yaşlı bakıcısı</option>
+												</select>
+											</div>
+
+											<div class="form-group col-sm-12">
+												<div class="form-line">
+													<div class="font-12">Tecrube</div>
+													<input type="text" class="form-control" name="tecrube" id="tecrube" value="@mydata[0].tecrube" required>
+												</div>
+											</div>
+
+										}
+										<div class="col-sm-12">
+											<button type="submit" value="Submit" asp-page-handler="Submit">Güncelle</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					// Assuming "selectedValue" is the variable with the new value
+					var selectedValue = "@mydata[0].city";
+					var selectedBolum = "@mydata[0].bolum";
+
+					// Set the selected value in the dropdown
+					var dropdown = document.getElementById("sehir");
+					if (dropdown) {
+						dropdown.value = selectedValue;
+					}
+					var dropdown = document.getElementById("bolum");
+					if (dropdown) {
+						dropdown.value = selectedBolum;
+					}
+				});
+			</script>
+
+		</section>
+
+
+	<script>
+		$(document).ready(function () {
+			
+			var notification = $('<div/>', {
+				'class': 'notification-message',
+				'text': '@Model.NotificationMessage'
+			}).css({
+				'position': 'absolute',
+				'top': '30px',
+				'right': '20px',
+				'padding': '15px',
+				'background-color': '#4CAF50',
+				'color': 'white',
+				'border-radius': '10px',
+				'box-shadow': '10px 10px 10px rgba(0,0,0,5.1)',
+				'z-index': '1000'
+			});
+			
+
+			$('#notification-area').append(notification);
+
+			setTimeout(function () {
+				notification.fadeOut('slow', function () {
+					$(this).remove();
+				});
+			}, 1500);
+		});
+	</script>
+	}
+
+</body>
+
+</html>

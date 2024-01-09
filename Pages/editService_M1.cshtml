@@ -1,0 +1,290 @@
+﻿@page
+@model WebApplication1.Pages.editServise_M1Model
+@{
+    Layout = "_LayoutWithSidebar";
+	List<Orders> orders = (List<Orders>)TempData["order"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- ... other head elements ... -->
+		<link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.4.min.js">
+		<style>
+
+			body, html {
+				margin: 0;
+				padding: 0;
+				font-family: 'Arial', sans-serif;
+				background: #f4f4f4;
+			}
+
+			.container-fluid {
+				width: 1260px; /* Increased width */
+				margin: auto;
+				height: auto;
+				padding: 20px;
+			}
+
+			.card {
+				background: #ffffff;
+				border-radius: 15px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+				padding: 30px;
+				margin-bottom: 30px;
+			}
+
+			.header h2 {
+				margin: 0;
+				padding-bottom: 15px;
+				border-bottom: 2px solid #007bff;
+				color: #007bff;
+				font-size: 24px;
+			}
+
+			.form-control {
+				width: 100%;
+				padding: 12px;
+				margin: 10px 0;
+				border-radius: 8px;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+
+			.form-line {
+				margin-bottom: 20px;
+			}
+
+			.font-12 {
+				font-size: 18px;
+				color: #333;
+				margin-bottom: 10px;
+			}
+
+			button[type=submit] {
+				margin-top: 20px;
+				background-color: #00CDC4;
+				color: white;
+				border: none;
+				padding: 15px 30px;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 18px;
+				transition: background-color 0.3s;
+				display: block; /* Make the button full-width */
+				width: 100%;
+			}
+
+				button[type=submit]:hover {
+					background-color: #333;
+				}
+
+			.image {
+				border: none;
+			}
+
+		</style>
+	</head>
+
+
+
+	<body>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<section class="content">
+			<div class="container-fluid">
+				<form id="form_validation" method="post" enctype="multipart/form-data">
+					<div class="card">
+
+						<div class="header">
+							<h2>Temizleyici</h2>
+						</div>
+						<div class="body">
+
+							<div class="form-group col-sm-12">
+								<div class="form-line">
+									<table>
+										<thead type="hidden">
+											<tr>
+												<th width="50%"></th>
+												<th width="50%"></th>
+											</tr>
+										</thead>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Salon Sayısı</div>
+													<input type="text" name="salonS" id="salonS" value="@orders[0].salon_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Salon Metresi</div>
+													<input type="text" name="salonM" id="salonM" value="@orders[0].salon_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Mütfak Sayısı</div>
+													<input type="text" name="mutfakS" id="mutfakS" value="@orders[0].mutfak_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Mütfak Metresi</div>
+													<input type="text" name="mutfakM" id="mutfakM" value="@orders[0].mutfak_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Buro Sayısı</div>
+													<input type="text" name="buroS" id="buroS" value="@orders[0].buro_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Buro Metresi</div>
+													<input type="text" name="buroM" id="buroM" value="@orders[0].buro_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Depo Sayısı</div>
+													<input type="text" name="depoS" id="depoS" value="@orders[0].depo_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Depo Metresi</div>
+													<input type="text" name="depoM" id="depoM" value="@orders[0].depo_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Sayısı</div>
+													<input type="text" name="banyoS" id="banyoS" value="@orders[0].banyo_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Metresi</div>
+													<input type="text" name="banyoM" id="banyoM" value="@orders[0].banyo_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Tuvalet Sayısı</div>
+													<input type="text" name="tuvaletS" id="tuvaletS" value="@orders[0].tuvalet_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Banyo Metresi</div>
+													<input type="text" name="tuvaletM" id="tuvaletM" value="@orders[0].tuvalet_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Oda Sayısı</div>
+													<input type="text" name="odaS" id="odaS" value="@orders[0].oda_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Oda Metresi</div>
+													<input type="text" name="odaM" id="odaM" value="@orders[0].oda_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Bahçe Sayısı</div>
+													<input type="text" name="bahceS" id="bahceS" value="@orders[0].bahce_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Bahçe Metresi</div>
+													<input type="text" name="bahceM" id="bahceM" value="@orders[0].bahca_metresi" />
+												</div>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Balkon Sayısı</div>
+													<input type="text" name="balkonS" id="balkonS" value="@orders[0].balkon_count" />
+												</div>
+											</td>
+											<td style="vertical-align: middle;">
+												<div class="form-line">
+													<div class="font-12">Balkon Metresi</div>
+													<input type="text" name="balkonM" id="balkonM" value="@orders[0].balkon_metresi" />
+												</div>
+											</td>
+										</tr>
+
+									</table>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-12">
+								<div class="form-line">
+									<div class="font-12">Not</div>
+									<input type="text" class="form-control" name="not" id="not" value="@orders[0].sd_not" required>
+								</div>
+							</div>
+
+							DateTime: <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+
+							<input type="hidden" class="form-control" name="agacS" id="agacS" placeholder="agacS" required>
+
+							<div class="col-sm-6" style="margin-bottom: 0px;">
+								<div class="form-group">
+									<div class="font-12 ex1">Image</div>
+									<input type="file" name="image" id="image" class="image" data-max-file-size="3M" data-allowed-file-extensions="jpg jpeg png gif" />
+								</div>
+							</div>
+
+							<input type="hidden" name="s_id" value="@Model.sd_id" />
+
+							<div class="col-sm-12">
+								<button type="submit" value="Submit" asp-page-handler="Submit">Güncelle</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,150 @@
+﻿@page
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        
+        .container1 {
+            display: flex; /* Establishes a flex container which is a row by default */
+        }
+
+        .box1 {
+            margin-top: 10%;
+            width: 50%; /* Sets each box to take up half of the container's width */
+            padding: 20px; /* Adds some padding inside the boxes */
+            border: 1px solid #ccc; /* Adds a light border around the boxes */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            border: none;
+            display: flex;
+            flex-direction: column; /* Stacks children (buttons) vertically */
+            align-items: center;
+        }
+
+        .box2 {
+            width: 50%; /* Sets each box to take up half of the container's width */
+            padding: 20px; /* Adds some padding inside the boxes */
+            border: 1px solid #ccc; /* Adds a light border around the boxes */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            border: none;
+            margin-left: -10%;
+        }
+
+        .box1:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Add a background color on hover */
+        .box1 button:hover {
+            background-color: #0EFFFF;
+        }
+            /* Optional: If you want to add a gap between the boxes */
+            .box1:not(:last-child) {
+                margin-right: 10px; /* Adds margin to the right of each box except the last one */
+            }
+
+        
+
+        .button1, .button2 {
+            margin-bottom: 15px;
+            padding: 60px; /* Increased padding */
+            border-radius: 80px;
+            
+            border: none;
+            background: linear-gradient(180deg, rgba(255, 223, 186, 0.22) 0%, rgba(255, 105, 180, 0.35) 100%);
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 30px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+            box-shadow: 5px 5px 5px rgba(0.5, 0.5, 0.5, 0.5); /* Horizontal and vertical offset of 2px, blur radius of 5px */
+        }
+
+            .button1, .button2, .button3 :hover {
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24), 0 2px 10px 0 rgba(0, 0, 0, 0.19); /* Shadow effect on hover */
+            }
+        
+
+    </style>
+</head>
+
+<body style="width: 100%; height: 100%; background: white">
+
+    
+    <div style="width:100%; left: 0px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Raleway; font-weight: 400; word-wrap: break-word">
+
+        <div style="width: 100%;height: 40px ; top: 0px;">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #0A8ED9;">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">BiServis</a>
+                    <div style="margin-left: auto;margin-right: 200;">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">Hakkimizda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/ContactUs">Iletisim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Gizlilik Politikasi</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="button" class="cancelbtn" onclick="navigateToPage()">GİRİŞ YAP</button>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+
+
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    
+
+
+    <div class="container1">
+
+
+
+        <div class="box1">
+            <a href="/MusteriOl?page=musteri"><button class="button1">Müşteri Ol</button></a>
+            <a href="/MusteriOl?page=calisan"><button class="button2">Çalışan Ol</button></a>
+        </div>
+        <div class="box2"><img src="https://cdn.dribbble.com/users/6498639/screenshots/15141150/media/b306a0b1906db326d48d3f6921698a65.gif" alt="Descriptive text for the image"></div>
+
+        
+    </div>
+
+    <script>
+        function navigateToPage() {
+            // Specify the URL of the page you want to navigate to
+            var targetPageUrl = "/login"; // Replace with the actual URL
+
+            // Navigate to the target page
+            window.location.href = targetPageUrl;
+        }
+    </script>
+</body>
+</html>

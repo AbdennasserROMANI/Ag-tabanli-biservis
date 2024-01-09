@@ -1,0 +1,196 @@
+﻿@page
+@model WebApplication1.Pages.Fatura_M4Model
+@{
+    if (ViewContext.HttpContext.Session.GetString("stat").Equals("1"))
+    {
+        Layout = "_LayoutWithSidebar";
+    }
+    else
+    {
+        Layout = "_WorkerLayout";
+    }
+    List<Orderss> orders = (List<Orderss>)TempData["order"];
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+
+    <style>
+
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+        }
+
+        .container-fluid {
+            width: 1260px; /* Increased width */
+            margin: auto;
+            height: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            margin: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-line {
+            margin-bottom: 20px;
+        }
+
+        .font-12 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        button[type=submit] {
+            margin-top: 20px;
+            background-color: #00CDC4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            display: block; /* Make the button full-width */
+            width: 100%;
+        }
+
+            button[type=submit]:hover {
+                background-color: #333;
+            }
+
+        .image {
+            border: none;
+        }
+
+
+        .inputt {
+            background-color: #333;
+            color: white;
+        }
+
+
+        .buttonn {
+            background: #333;
+            color: white;
+            width: 20%;
+            margin-top: 2%;
+            margin-bottom: 1%;
+            display: block; /* Makes the element a block-level element */
+            margin-left: auto; /* Centers the element horizontally */
+            margin-right: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="header">
+                    <h1>Çocuk Bakıcısı</h1>
+                </div>
+
+
+                <form method="post">
+                    <label for="numberOfChildren">Number of Children : @Model.NumberOfChildren</label>
+                    @{
+                        for (int i = 0; i < orders[0].children.Count; i++)
+                        {
+                            <div class="font-12">Çocuk @i Yaş : @orders[0].children[i].cy_yas | Cinsiyet : @orders[0].children[i].cy_sex</div>
+                        }
+
+                    }
+
+                    <table>
+                        <thead type="hidden">
+                            <tr>
+                                <th width="50%"></th>
+                                <th width="50%"></th>
+                            </tr>
+                        </thead>
+
+                        <tr>
+                            <td style="vertical-align: middle;">
+                                <div class="form-line">
+                                    <div class="font-12">Gun Sayısı : @orders[0].gun_sayisi</div>
+                                </div>
+                            </td>
+                            <td style="vertical-align: middle;">
+                                <div class="form-line">
+                                    <div class="font-12">Toplam Saat Sayısı : @orders[0].saat_sayisi</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    Tarih : <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" readonly />
+
+                    <div>
+                        <div class="order-details">
+
+                            <p>Hizmet Tarihi : @orders[0].order_date</p>
+                            <p>Teklif fiyati : @orders[0].te_fiyat</p>
+
+                            <p>Müşteri Adı : @orders[0].cu_name</p>
+                            <p>Müşteri No : @orders[0].customer_id</p>
+                            <p>Müşteri Adresi : @orders[0].cu_addres</p>
+                            <p>Telap No : @orders[0].sd_id</>
+
+                            <p>Çalışan Adı : @orders[0].wo_name</p>
+                            <p>Çalışan No : @orders[0].wo_id</p>
+                            <p>çalışan Cep No. : @orders[0].wo_tel</p>
+                            <p>Teklif Verilen Tarihi : @orders[0].te_date</p>
+
+                        </div>
+                    </div>
+                    <button id="downloadPdf">Download PDF</button>
+                </form>
+            </div>
+        </div>
+</body>
+
+<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+<script>
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+        // Use html2pdf to generate a PDF
+        var element = document.querySelector('.content');
+        html2pdf(element);
+    });
+</script>
+
+</html>

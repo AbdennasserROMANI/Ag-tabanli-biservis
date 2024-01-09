@@ -1,0 +1,261 @@
+﻿@page
+@model WebApplication1.Pages.MusteriOlModel
+@{
+	//List<Status> statues = (List<Status>) ViewData["status"];
+	String musteri = (String) Request.Query["page"];
+	bool isMusteri;
+	if (musteri != null)
+	{
+		if (musteri.Equals("musteri"))
+		{
+			isMusteri = true;
+		}
+		else
+		{
+			isMusteri = false;
+		}
+	}
+	else
+	{
+		isMusteri = true;
+	}
+
+	ViewData["isMusteri"] = isMusteri;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Your Page Title</title>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<style>
+
+		
+
+
+			/* Insert the CSS code here */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Arial', sans-serif;
+			}
+
+			.card {
+				border-radius: 0px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				overflow: hidden;
+			}
+
+			.header h2 {
+				font-weight:bold;
+				font-size: 24px;
+				color: white;
+				padding: 15px;
+				background-color: #333;
+				border-bottom: 1px solid #eaeaea;
+			}
+			/* ... Rest of the CSS ... */
+
+			
+
+			/* Style the form body */
+			.body {
+				color: #333;
+				padding: 15px; /* Add some padding inside the form */
+				background-color: white; /* White background for the form body */
+				font-weight: bold;
+				
+			}
+
+			/* Style each input and select element with modern looks */
+			.form-control {
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+				border: 5px solid #333; /* Subtle border */
+				border-radius: 5px; /* Slightly rounded corners for inputs */
+				padding: 10px; /* Add some padding inside inputs */
+				font-size: 16px; /* Slightly larger font size for readability */
+				font-weight: bold;
+				color:#333;
+				margin-bottom: 20px;
+			}
+
+			/* Style the submit button with a modern appearance */
+			button[type="submit"] {
+				background-color:#333;
+				color: white; /* White text on the button */
+				padding: 15px 15px; /* Larger padding for a bigger button */
+				border: none; /* Remove the default border */
+				border-radius: 5px; /* Slightly rounded corners for the button */
+				cursor: pointer; /* A pointer cursor on hover */
+				font-size: 18px; /* Slightly larger font size for the button */
+				transition: background-color 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+			}
+
+			/* Hover effect for the submit button */
+			button[type="submit"]:hover {
+				background-color: #48440C; /* A slightly darker blue on hover */
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* A subtle shadow on hover */
+				color: white;
+			}
+
+			/* Responsive adjustments for smaller screens */
+			
+    
+				button[type="submit"] {
+					width: 100%; /* Full width button on smaller screens */
+					margin-top: 20px;
+				}
+
+			
+
+
+		</style>
+	</head>
+
+
+	<body>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<section class="content">
+
+			<div class="container-fluid">
+
+				<div class="row clearfix">
+					<div class="">
+
+						<form id="form_validation" method="post" enctype="multipart/form-data">
+							<div class="card corner-radius">
+								<div class="header">
+									<h2>Müşteri OL</h2>
+								</div>
+								<div class="body">
+
+									<div class="row clearfix">
+
+										@if(!isMusteri){
+											<div>
+												<label for="image">fotoğraf Seç : </label>
+												<input type="file" name="image" id="image" accept="image/*" required>
+											</div>
+										}
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Adı Soyadı</div>
+												<input type="text" class="form-control" name="name" id="name" placeholder="@musteri" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">TC.</div>
+												<input type="text" class="form-control" name="tcnu" id="tcnu" placeholder="TC Numarası" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Telefon Numarası</div>
+											<input type="text" class="form-control" name="telephon" id="telephon" placeholder="+90 Telefon Numarası" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">E-Posta</div>
+												<input type="text" class="form-control" name="eposta" id="eposta" placeholder="E-Posta" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Şifre</div>
+												<input type="password" class="form-control" name="password" id="password" placeholder="Şifre" required>
+											</div>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Şifre'yi Tekrarla</div>
+												<input type="password" class="form-control" name="tkpassword" id="tkpassword" placeholder="Şifre'yi Tekrarla" required>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="font-12">Şehir</div>
+											<select class="form-control show-tick" name="sehir" id="sehir">
+												<option value="Istanbul">Istanbul</option>
+												<option value="Ankara">Ankara</option>
+												<option value="Izmir">Izmir</option>
+												<option value="Bursa">Bursa</option>
+												<option value="Adana">Adana</option>
+												<option value="Gaziantep">Gaziantep</option>
+												<option value="Konya">Konya</option>
+												<option value="Antalya">Antalya</option>
+												<option value="Diyarbakır">Diyarbakir</option>
+												<option value="Mersin">Mersin</option>
+											</select>
+										</div>
+
+										<div class="form-group col-sm-12">
+											<div class="form-line">
+												<div class="font-12">Adres</div>
+												<input type="text" class="form-control" name="adres" id="adres" placeholder="Adres" required>
+											</div>
+										</div>
+
+										@if (!isMusteri)
+										{
+											<div class="form-group">
+												<div class="font-12">Bolum</div>
+												<select class="form-control show-tick" name="bolum" id="bolum">
+													<option value="1">Temizleyici</option>
+													<option value="2">Tesisatçı</option>
+													<option value="3">Electrikçi</option>
+													<option value="4">Boyacı</option>
+													<option value="5">Marangoz</option>
+													<option value="6">Bahçıvan</option>
+													<option value="7">Çocuk bakıcısı</option>
+													<option value="8">Yaşlı bakıcısı</option>
+												</select>
+											</div>
+
+											<div class="form-group col-sm-12">
+												<div class="form-line">
+													<div class="font-12">Yıl Tecrübesi</div>
+													<input type="text" class="form-control" name="tecrube" id="tecrube" placeholder="Yıl Olarak" required>
+												</div>
+											</div>
+
+											<div class="form-group col-sm-12">
+												<div class="form-line">
+													<div class="font-12">Bize not birakın</div>
+													<input type="text" class="form-control" name="not" id="not" placeholder="Bizimle neden çalışmak istediğinizi anlatın" required>
+												</div>
+											</div>
+										}
+										<input type="hidden" name="ismusteri" value="@musteri" />
+										<div class="col-sm-12">
+											<button type="submit" value="Submit" asp-page-handler="Submit">GÖNDER</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</form>
+						
+
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+	</body>
+</html>

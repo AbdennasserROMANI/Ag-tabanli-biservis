@@ -1,0 +1,164 @@
+﻿@page
+@model WebApplication1.Pages.activeOrderModel
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Orders> orders = (List<Orders>)TempData["order"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-bottom: 2.5%;
+            overflow-x: hidden;
+        }
+
+        .order-card {
+            background: #333;
+            border-radius: 25px;
+            box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.9);
+            margin-top: 10px;
+            padding: 70px;
+            width: 1150px;
+            height: auto;
+            margin-bottom: 3%;
+            position: relative; /* Needed for absolute positioning of the service name */
+        }
+
+            .order-card h1 {
+                margin: 0; /* Remove margin from h1 for tighter spacing */
+                position: absolute; /* Position the service name absolutely */
+                top: 15px; /* Position from the top of the card */
+                right: 30px; /* Position from the right of the card */
+                color: #fff; /* Set a color that is visible on the background */
+                font-size: 1.5rem; /* Increase font size for visibility */
+            }
+
+
+            
+
+            .order-card h11 {
+                margin: 0; /* Remove margin from h1 for tighter spacing */
+                position: absolute; /* Position the service name absolutely */
+                top: 15px; /* Position from the top of the card */
+                right: 90%; /* Position from the right of the card */
+                color: #fff; /* Set a color that is visible on the background */
+                font-size: 1.5rem; /* Increase font size for visibility */
+            }
+       
+
+            .order-card h15 {
+                position: absolute; /* Position the service name absolutely */
+                margin: 0; /* Remove margin from h1 for tighter spacing */
+                top: 90px; /* Position from the top of the card */
+                margin-right: 30%; /* Position from the right of the card */
+                color: #fff; /* Set a color that is visible on the background */
+                font-size: 1.1rem; /* Increase font size for visibility */
+            }
+
+            .order-card h16 {
+                position: absolute; /* Position the service name absolutely */
+                margin: 0; /* Remove margin from h1 for tighter spacing */
+                top: 110px; /* Position from the top of the card */
+                margin-right: 30%; /* Position from the right of the card */
+                color: #fff; /* Set a color that is visible on the background */
+                font-size: 1.1rem; /* Increase font size for visibility */
+            }
+
+            
+ 
+            .order-card form {
+                text-align: center;
+                position: absolute; /* Ensure form does not affect the flow of the document */
+                bottom: 20px; /* Position form at the bottom of the card */
+                left: 77%; /* Center form horizontally */
+                transform: translateX(-50%); /* Offset form by half its width for true centering */
+                width: 100%; /* Form takes full width of the card */
+            }
+
+
+            .order-card button {
+                background: linear-gradient(180deg, rgba(255, 223, 120, 0.8) 0%, rgba(255, 105, 180, 0.8) 100%);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 0.9rem;
+                margin: 5px;
+                transition: background-color 0.2s;
+            }
+
+                .order-card button:hover {
+                    background-color: #0056b3;
+                }
+
+
+            .order-details {
+                padding: 10px 20px; /* Add padding inside the details container */
+                color: #fff; /* Text color */
+            }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-flex flex-wrap justify-content-center">
+        @{
+            if (orders!=null){
+                foreach (Orders order in orders)
+                {
+                     
+                    <div class="order-card">
+                        <a href="editService_@order.s_view_mode?sd_id=@order.sd_id">
+                            <h11>@order.s_name</h11>
+                        </a>
+                        <h1>Telap Tarihi : @order.order_date</h1>
+
+                        <div class="order-details">
+                            <h15>@order.sd_id</h15>
+                            <h16>@order.address</h16>
+
+                        </div>
+
+                        <form method="post">
+                            <input type="hidden" name="sd_id" value="@order.sd_id" />
+                            <input type="hidden" name="s_id" value="@order.s_id" />
+                            <input type="hidden" name="s_view_mode" value="@order.s_view_mode" />
+                            @if (order.sd_stat.Equals("1"))
+                            {
+                                <button type="submit" name="handler" value="Teklifler">Teklifleri Gör (@order.teklif_count)</button>
+                                <button type="submit" name="handler" value="sil">Sil</button>
+                                <button type="submit" name="handler" value="iptal">Iptal Et</button>
+                                <button type="submit" name="handler" value="guncel">Güncelle</button>
+                                <button type="submit" name="handler" value="bitti">Bitti</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="handler" value="aktifEt">Aktif Et</button>
+                                <button type="submit" name="handler" value="sil">Sil</button>
+                            }
+                        </form>
+                    </div>
+    
+                }
+            }
+        }
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+﻿@page
+@model WebApplication1.Pages.Fatura_M3Model
+@{
+	if (ViewContext.HttpContext.Session.GetString("stat").Equals("1"))
+	{
+		Layout = "_LayoutWithSidebar";
+	}
+	else
+	{
+		Layout = "_WorkerLayout";
+	}
+	List<Orderss> orders = (List<Orderss>)TempData["order"];
+}
+
+
+<html>
+	<head>
+		<style>
+
+			body, html {
+				margin: 0;
+				padding: 0;
+				font-family: 'Arial', sans-serif;
+				background: #f4f4f4;
+			}
+
+			.container-fluid {
+				width: 1260px; /* Increased width */
+				margin: auto;
+				height: auto;
+				padding: 20px;
+			}
+
+			.card {
+				background: #ffffff;
+				border-radius: 15px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+				padding: 30px;
+				margin-bottom: 30px;
+			}
+
+			.header h2 {
+				margin: 0;
+				padding-bottom: 15px;
+				border-bottom: 2px solid #007bff;
+				color: #007bff;
+				font-size: 24px;
+			}
+
+			.form-control {
+				width: 100%;
+				padding: 12px;
+				margin: 10px 0;
+				border-radius: 8px;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+
+			.form-line {
+				margin-bottom: 20px;
+			}
+
+			.font-12 {
+				font-size: 18px;
+				color: #333;
+				margin-bottom: 10px;
+			}
+
+			button[type=submit] {
+				margin-top: 20px;
+				background-color: #00CDC4;
+				color: white;
+				border: none;
+				padding: 15px 30px;
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 18px;
+				transition: background-color 0.3s;
+				display: block; /* Make the button full-width */
+				width: 100%;
+			}
+
+				button[type=submit]:hover {
+					background-color: #333;
+				}
+
+			.image {
+				border: none;
+			}
+
+
+		
+
+		.container-fluid {
+			max-width: 1260px;
+			margin: auto;
+			padding: 20px;
+		}
+
+		.card {
+			background: #ffffff;
+			border-radius: 15px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+			padding: 30px;
+			margin-bottom: 30px;
+		}
+
+		.header h2 {
+			margin: 0;
+			padding-bottom: 15px;
+			border-bottom: 2px solid #007bff;
+			color: #007bff;
+			font-size: 24px;
+		}
+
+		.form-control {
+			width: 100%;
+			padding: 12px;
+			margin: 10px 0;
+			border-radius: 8px;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
+
+		.form-line {
+			margin-bottom: 20px;
+		}
+
+		.font-18 {
+			font-size: 18px;
+			color: #333;
+			margin-bottom: 10px;
+		}
+
+		#downloadPdf {
+			background-color: #4CAF50;
+			color: white;
+			padding: 15px 30px;
+			margin: 30px 0;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			font-size: 18px;
+			transition: background-color 0.3s, transform 0.1s;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			width: 100%;
+		}
+
+			#downloadPdf:hover {
+				background-color: #45a049;
+				transform: scale(1.05);
+			}
+
+			#downloadPdf:active {
+				background-color: #3e8e41;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+				transform: scale(1);
+			}
+
+		.order-details {
+			padding: 15px;
+			background: #f9f9f9;
+			border-radius: 8px;
+			margin-top: 30px;
+
+		}
+
+			.order-details p {
+				font-size: 16px;
+				color: #333;
+				margin-bottom: 5px;
+			}
+	</style>
+
+	</head>
+
+
+	<body>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<section class="content">
+
+			<div class="container-fluid">
+
+
+
+				<form id="form_validation" method="post" enctype="multipart/form-data">
+					<div class="card">
+						<div class="header">
+							<h2>Bahçıvan</h2>
+						</div>
+						<div class="body">
+
+
+
+
+								<div class="form-group col-sm-12">
+									<div class="form-line">
+										<table>
+											<thead type="hidden">
+												<tr>
+													<th width="50%"></th>
+													<th width="50%"></th>
+												</tr>
+											</thead>
+
+											<tr>
+												<td style="vertical-align: middle;">
+													<div class="form-line">
+														<div class="font-12">Bahce Sayısı : @orders[0].bahce_count</div>
+													</div>
+												</td>
+												<td style="vertical-align: middle;">
+													<div class="form-line">
+														<div class="font-12">Bahce Metresi : @orders[0].bahca_metresi</div>
+													</div>
+												</td>
+											</tr>
+
+										</table>
+									</div>
+								</div>
+
+								<div class="form-group col-sm-12">
+									<div class="form-line">
+										<div class="font-12">Agac Sayisi : @orders[0].agac_count</div>
+									</div>
+								</div>
+
+								DateTime: <input class="form-control" name="time" asp-for="CurrentTime" asp-format="{0:yyyy-MM-ddTHH:mm}" readonly/>
+
+							
+						</div>
+					</div>
+
+				<div>
+					<div class="order-details">
+
+						<p>Hizmet Tarihi : @orders[0].order_date</p>
+						<p>Teklif fiyati : @orders[0].te_fiyat</p>
+
+						<p>Müşteri Adı : @orders[0].cu_name</p>
+						<p>Müşteri No : @orders[0].customer_id</p>
+						<p>Müşteri Adresi : @orders[0].cu_addres</p>
+						<p>Telap No : @orders[0].sd_id</>
+
+						<p>Çalışan Adı : @orders[0].wo_name</p>
+						<p>Çalışan No : @orders[0].wo_id</p>
+						<p>çalışan Cep No. : @orders[0].wo_tel</p>
+						<p>Teklif Verilen Tarihi : @orders[0].te_date</p>
+
+					</div>
+				</div>
+
+				</form>
+
+			<button id="downloadPdf">Download PDF</button>
+			</div>
+
+		</section>
+
+	<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+
+	<script>
+		document.getElementById('downloadPdf').addEventListener('click', function () {
+			// Use html2pdf to generate a PDF
+			var element = document.querySelector('.content');
+			html2pdf(element);
+		});
+	</script>
+
+	</body>
+</html>
+

@@ -1,0 +1,180 @@
+﻿@page
+@model WebApplication1.Pages.MusteriModel
+@{
+    Layout = "_LayoutWithSidebar";
+    List<Servis> services = (List<Servis>) ViewData["servis"];
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+        
+        
+        
+        
+        <style>
+
+
+            body {
+                margin: 0;
+                font-family: 'Arial', sans-serif;
+                background: #f0f0f0; /* Light grey background */
+                display: flex;
+                overflow-x: hidden;
+            }
+
+
+            /****************************/
+            /****************************/
+            /****************************/
+            /****************************/
+            /****************************/
+
+
+            .services-header {
+                text-align: center; /* Center the header text */
+                padding: 20px 40px; /* Add some space around the text */
+                background-color: #f0f0f0; /* Light grey background, or choose your color */
+                color: #333; /* Dark text color for contrast */
+                font-size: 1.5rem; /* Larger text size */
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px; /* Padding on the sides */
+            }
+
+
+            .services-header h1,
+            .services-header span {
+                margin-left: 3%; /* Reset default margins */
+                padding: 0 10px; /* Add padding to the left and right of each element */
+            }
+
+            /* Alternatively, if you want to use margin instead of padding */
+            .services-header h1 {
+                margin-right: 25px; /* Add margin to the right of the first text */
+            }
+
+            .services-header span {
+                font-size: 20px;
+                margin-left: 135%; /* Add margin to the left of the second text */
+            }
+
+            /******************/
+            /******************/
+            /******************/
+            /******************/
+            /******************/
+            /******************/
+
+
+
+
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* Three columns */
+                grid-auto-rows: minmax(150px, 150px); /* Minimum row height */
+                gap: 30px;
+                padding: 40px;
+                justify-content: center;
+                align-content: start;
+                width: 1100%; /* Full width */
+                max-width: 1270px; /* Max width can be adjusted based on your design */
+                
+            }
+
+            .service-item {
+                position: relative;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 15px;
+                height: 115%;
+                margin-bottom: 30px; /* This adds space below each box */
+            }
+
+                .service-item img {
+                    width: auto; /* Full width of the service item */
+                    height: 150px; /* Maintain aspect ratio */
+                    object-fit: cover; /* Ensures the image covers the area nicely */
+                    border-radius: 10px; /* Optional: if you want rounded corners on images */
+                }
+
+            .coming-soon {
+                font-size: 20px;
+                color: #333;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .service-name {
+                position: absolute;
+                top: 10px; /* Adjust as needed */
+                left: 10px; /* Adjust as needed */
+                background: linear-gradient(180deg, rgba(255, 223, 120, 0.8) 0%, rgba(255, 105, 180, 0.8) 100%);
+                color: #fff; /* White text color */
+                padding: 5px 10px; /* Adjust as needed */
+                border-radius: 5px; /* Rounded corners */
+                font-size: 0.9em; /* Adjust as needed */
+                box-shadow: 0 2px 4px rgba(0, 0, 0.5, 0.5); /* Optional: adds a small shadow for depth */
+            }
+
+
+        </style>
+
+
+
+
+    </head>
+
+
+    <body>
+
+
+
+        <div class="services-header">
+            <h1>Servisler</h1>
+            <span>8 Servis Mevcüttür</span>
+        </div>
+
+
+
+        <div class="services-grid">
+            @for (int i = 0; i < services.Count; i++)
+            {
+                <div class="service-item">
+                <div class="service-name">@services[i].servis_name</div>
+                    <a href="Service_@services[i].servis_view_mode?s_id=@services[i].servis_id">
+                        <img src="@services[i].servis_logo" alt="Service Logo" />
+                    </a>
+                </div>
+            }
+            @if (services.Count == 8)
+            {
+                <div class="service-item coming-soon">
+                    Coming Soon
+                </div>
+            }
+        </div>
+
+
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,84 @@
+﻿@page
+@model WebApplication1.Pages.NotificationWorkerModel
+@{
+    Layout = "_WorkerLayout";
+    List<WorkerNotif> notifs = (List<WorkerNotif>)TempData["notif"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Notifications</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+        }
+
+        .notification-container {
+            padding: 20px;
+            width: 180%; /* Set width to 100% */
+            margin: 0 auto; /* Center the container */
+            box-sizing: border-box;
+        }
+
+        .notification {
+            padding: 20px;
+            border-left: 20px solid #007bff; /* Blue border for unread notifications */
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .notification:hover {
+                background-color: #e9ecef;
+                border-left-color: #0056b3; /* Darker blue on hover */
+            }
+
+            .notification h6 {
+                margin: 0;
+                font-size: 16px;
+                color: #333;
+            }
+
+        .notification-read {
+            border-left-color: #6c757d; /* Grey border for read notifications */
+        }
+
+            .notification-read:hover {
+                border-left-color: #5a6268; /* Darker grey on hover */
+            }
+
+        .important {
+            color: #dc3545; /* Red color for important notifications */
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="notification-container">
+        @foreach (WorkerNotif notif in notifs)
+        {
+            <div class="notification @(notif.te_stat.Equals("1") ? "notification-accepted" : "notification-rejected")">
+                <h6>
+                    @notif.sd_id : @notif.cu_name
+                    @(notif.te_stat.Equals("1") ? "Teklifinizi Kabul Edildi" : "Teklifinizi Rededildi"),
+                    Teklif Fiyati : @notif.te_fiyat
+                    @if (notif.cu_stat.Equals("0"))
+                    {
+                        <span class="important">**********</span>
+                    }
+                </h6>
+            </div>
+        }
+    </div>
+</body>
+</html>

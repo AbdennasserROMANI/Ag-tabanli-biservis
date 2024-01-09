@@ -1,0 +1,108 @@
+
+
+body {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    min-height: 100vh; /* Full viewport height */
+    margin: 0; /* Reset default margin */
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-weight: bold;
+    position: sticky; /* Sticky position */
+}
+
+a {
+    color: #0A8ED9;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #0A8ED9;
+    border-color: #1861ac;
+    font-weight: bold;
+}
+
+.border-top {
+    border-top: px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+
+@keyframes pulse {
+    0%, 90% {
+        transform: scale(1); /* Original size */
+    }
+
+    30% {
+        transform: scale(1.07); /* Slightly larger */
+    }
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 12px 20px;
+    background: linear-gradient(180deg, rgba(255, 223, 186, 0.22) 0%, rgba(255, 105, 180, 0.35) 100%);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    animation: pulse 2s infinite ease-in-out; /* Apply the pulse animation */
+}
+
+.centerbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    left: 350px;
+}
+
+.btn-group button {
+    background-color: #DADFDF; /* Green background */
+    border: 1px solid gray; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+    .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+    }
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #0EFFFF;
+}
+
+
+
+
